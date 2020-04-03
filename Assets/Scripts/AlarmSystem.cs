@@ -1,21 +1,27 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Animator))]
 public class AlarmSystem : MonoBehaviour
 {
     [SerializeField] private Doors _doors;
     
     private Animator _doorsAnimator;
+    private Animator _animator;
     private Sensor _innerSensor;
     private Sensor _outerSensor;
     private bool _isSystemAlarmed;
     private AlarmLight[] _alarmLights;
+    private AudioSource _alarmSound;
 
     private void Awake()
     {
         _innerSensor = transform.Find("InnerSensor").GetComponent<Sensor>();
         _outerSensor = transform.Find("OuterSensor").GetComponent<Sensor>();
         _doorsAnimator = _doors.GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         _alarmLights = FindObjectsOfType<AlarmLight>();
+        _alarmSound = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -59,6 +65,8 @@ public class AlarmSystem : MonoBehaviour
         {
             light.AlarmOn();
         }
+
+        PlayAlarmSound();
     }
 
     private void SystemDisalarm()
@@ -69,5 +77,19 @@ public class AlarmSystem : MonoBehaviour
         {
             light.AlarmOff();
         }
+
+        StopAlarmSound();  
+    }
+
+    private void PlayAlarmSound()
+    {
+        _alarmSound.Play();
+        _animator.SetTrigger("On");
+    }
+
+    private void StopAlarmSound()
+    {
+        _alarmSound.Stop();
+        _animator.SetTrigger("Off");
     }
 }

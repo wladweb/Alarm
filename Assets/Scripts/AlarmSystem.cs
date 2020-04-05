@@ -5,19 +5,17 @@
 public class AlarmSystem : MonoBehaviour
 {
     [SerializeField] private Doors _doors;
+    [SerializeField] private Sensor _innerSensor;
+    [SerializeField] private Sensor _outerSensor;
     
     private Animator _doorsAnimator;
     private Animator _animator;
-    private Sensor _innerSensor;
-    private Sensor _outerSensor;
     private bool _isSystemAlarmed;
     private AlarmLight[] _alarmLights;
     private AudioSource _alarmSound;
 
     private void Awake()
     {
-        _innerSensor = transform.Find("InnerSensor").GetComponent<Sensor>();
-        _outerSensor = transform.Find("OuterSensor").GetComponent<Sensor>();
         _doorsAnimator = _doors.GetComponent<Animator>();
         _animator = GetComponent<Animator>();
         _alarmLights = FindObjectsOfType<AlarmLight>();

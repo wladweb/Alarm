@@ -886,6 +886,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _doors: {fileID: 7075448}
+  _innerSensor: {fileID: 1102001463}
+  _outerSensor: {fileID: 1019628201}
 --- !u!82 &1317064496
 AudioSource:
   m_ObjectHideFlags: 0

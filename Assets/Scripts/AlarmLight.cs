@@ -4,17 +4,14 @@
 public class AlarmLight : MonoBehaviour
 {
     [SerializeField] private float _lightIntensity = 20;
+    [SerializeField] private Light _redLight;
+    [SerializeField] private Light _blueLight;
 
     private Animator _animator;
-    private Light _redLight;
-    private Light _blueLight;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _redLight = transform.Find("Red").GetComponent<Light>();
-        _blueLight = transform.Find("Blue").GetComponent<Light>();
-
         LightOff();
     }
 
